@@ -1,9 +1,14 @@
 import express from "express";
 import mongoose from "mongoose";
+import dotenv from "dotenv";
 
-mongoose.connect(
-  "mongodb+srv://ardaalkan:<password>@cluster0.xmyka6w.mongodb.net/?retryWrites=true&w=majority"
-);
+dotenv.config();
+
+mongoose.connect(process.env.MONGO).then(() => {
+  console.log("Connected MongoDB!");
+}).catch((err) => {
+  console.log(err);
+});
 //Sunucuyu ayağa kaldırmak için gerekli satırlar.
 //Nodemon paketi ile aktif server dinleme sağlanır.
 const app = express();
