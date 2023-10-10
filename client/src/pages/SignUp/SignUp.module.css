@@ -1,0 +1,79 @@
+/* NewSignUp.module.css */
+
+.pageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+}
+
+.signUp {
+  text-align: center;
+  background-color: #f8f8f9;
+  padding: 80px;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(110, 110, 110, 0.2);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.usernameInput {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.usernameInput:focus {
+  outline: none;
+  border-color: #a3d0ff;
+  box-shadow: 0 0 5px rgba(159, 205, 255, 0.5);
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  color: #111439;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.buttonSignUp {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #111439;
+  color: #fff;
+  font-size: 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+  text-transform: uppercase;
+}
+
+.buttonSignUp:hover {
+  background-color: #204868;
+}
+
+.buttonSignUp:focus {
+  outline: none;
+}
+
+.buttonSignUp:active {
+  background-color: #003f80;
+}
+
+.usernameInput::placeholder {
+  color: #999;
+  font-size: 14px;
+}
