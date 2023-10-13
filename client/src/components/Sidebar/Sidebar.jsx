@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { BookPlus, LayoutDashboard, FileSearch } from "lucide-react";
+import Image from "../../assets/images/survey_app_image.jpg";
 import Avatar from "./Avatar/Avatar";
 import styles from "./Sidebar.module.css";
 /*
@@ -10,7 +11,10 @@ izole olarak kullanılmasını sağlar yani stil isim çakışmalarını ve kayg
 export default function Sidebar() {
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 720;
-
+  /*
+sayfa genişliğini izleyen bir React işlev bileşeni oluşturur. Sayfa genişliği değiştiğinde, yeni genişlik değeri kaydedilir ve 
+bileşenin yeniden render edilmesi sağlanır. Aynı zamanda bileşen kaldırıldığında veya etkisi değiştirildiğinde olay dinleyicisi kaldırılır.
+*/
   useEffect(() => {
     window.addEventListener("resize", () => setWidth(window.innerWidth));
     return () =>
@@ -24,15 +28,14 @@ export default function Sidebar() {
     <div className={styles.sidebar}>
       <div className={styles.sidebarContent}>
         <div className={styles.user}>
-          <Avatar></Avatar>
-          <p>Welcome</p>
+          <Avatar src={Image}></Avatar>
+          <p>Welcome!</p>
         </div>
         <nav className={styles.links}>
           <ul>
             <li>
               <NavLink
                 to="/"
-                activeClassName={styles.activeLink}
                 style={{ textDecoration: "none" }}
                 className={classNameFunc}
               >
@@ -43,7 +46,6 @@ export default function Sidebar() {
             <li>
               <NavLink
                 to="/all"
-                activeClassName={styles.activeLink}
                 style={{ textDecoration: "none" }}
                 className={classNameFunc}
               >
@@ -54,7 +56,6 @@ export default function Sidebar() {
             <li>
               <NavLink
                 to="/add"
-                activeClassName={styles.activeLink}
                 style={{ textDecoration: "none" }}
                 className={classNameFunc}
               >
