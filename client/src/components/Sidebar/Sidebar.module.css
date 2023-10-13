@@ -26,10 +26,11 @@
   margin: 10px 0.6rem 0 0.6rem;
   color: inherit;
   text-decoration: inherit;
+  border-radius: 10px;
 }
 .sidebar .links a {
   display: flex;
-  padding: 8px 1rem 8px 1rem;
+  padding: 12px 1rem 12px 1rem;
   border-radius: 10px;
   width: 100%;
   color: #333;
@@ -49,11 +50,9 @@
   background-color: #c9e1fd;
 }
 
-.link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
+.activeLink {
+  color: #111;
+  background-color: #c9e1fd;
 }
 
 @media (max-width: 900px) {
@@ -94,4 +93,3 @@
   background-color: #c9e1fd;
   border-radius: 10px;
 }
-
