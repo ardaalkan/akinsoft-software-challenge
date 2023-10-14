@@ -1,11 +1,18 @@
 .avatar {
-    display: inline-block;
-    height: 180px;
-    width: 180px;
-    border-radius: 50%;
-    overflow: hidden;
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+  border-radius: 20%;
+  overflow: hidden;
+}
+.avatar img {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .avatar {
+    height: 60px;
+    width: 60px;
   }
-  .avatar img {
-    width: 100%;
-    height: 100%;
-  }
+}
