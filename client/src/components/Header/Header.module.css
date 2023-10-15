@@ -8,9 +8,14 @@
   border-bottom: 1px solid rgb(205, 203, 203);
 }
 
+/* .navUl{
+} */
+
 .navList {
   list-style: none;
   padding: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .navItem {

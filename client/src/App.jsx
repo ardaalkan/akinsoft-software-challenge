@@ -5,18 +5,21 @@ import Add from "./pages/Add/Add";
 import All from "./pages/All/All";
 import Home from "./pages/Home/Home";
 import Layout from "./components/Layout/Layout";
+import PrivateRoute from "./components/PrivateRouter/PrivateRoute";
 export default function App() {
   return (
-      <BrowserRouter>
-        <Routes>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PrivateRoute />}>
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/all" element={<All />}></Route>
-            <Route path="/add" element={<Add />}></Route>
+            <Route path="/" element={<Home />}/>
+            <Route path="/all" element={<All />}/>
+            <Route path="/add" element={<Add />}/>
           </Route>
-          <Route path="sign-in" element={<SignIn />} />
-          <Route path="sign-up" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
+        </Route>
+        <Route path="sign-in" element={<SignIn />} />
+        <Route path="sign-up" element={<Signup />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
