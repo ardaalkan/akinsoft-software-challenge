@@ -28,11 +28,7 @@ export default function Add() {
           <input type="date" />
         </label>
         <label>
-          <span>Project Category:</span>
-          <Select />
-        </label>
-        <label>
-          <span>Assign to:</span>
+          <span>Survey Category:</span>
           <Select />
         </label>
         <button className={styles.btn}>Add Survey</button>
