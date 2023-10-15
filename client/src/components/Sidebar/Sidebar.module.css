@@ -89,3 +89,7 @@
   background-color: #c9e1fd;
   border-radius: 10px;
 }
+
+.sidebar .signOut {
+  padding: 10px;
+}

@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { BookPlus, LayoutDashboard, FileSearch } from "lucide-react";
+import { BookPlus, LayoutDashboard, FileSearch, LogOut } from "lucide-react";
 import Image from "../../assets/images/survey_app_image.jpg";
 import Avatar from "./Avatar/Avatar";
 import styles from "./Sidebar.module.css";
+import { useDispatch } from "react-redux";
+import {
+  signOutStart,
+  signOutSuccess,
+  signOutFailure,
+} from "../../redux/user/userSlice";
 
 export default function Sidebar() {
   const [width, setWidth] = useState(window.innerWidth);
   const breakpoint = 720;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleResize = () => {
@@ -19,6 +26,22 @@ export default function Sidebar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutStart());
+      const res = await fetch("/api/auth/signout");
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(signOutFailure(data.message));
+        return;
+      }
+      dispatch(signOutSuccess(data));
+    } catch (error) {
+      // eslint-disable-next-line no-undef
+      dispatch(signOutFailure(data.message));
+    }
+  };
 
   const classNameFunc = ({ isActive }) => (isActive ? styles.activeLink : "");
 
@@ -59,6 +82,16 @@ export default function Sidebar() {
               >
                 <BookPlus style={{ marginRight: "25px" }} />
                 {width > breakpoint && <span>Add New Survey</span>}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                style={{ textDecoration: "none" }}
+                className={classNameFunc}
+                onClick={handleSignOut}
+              >
+                <LogOut style={{ marginRight: "25px" }} />
+                {width > breakpoint && <span>Sign Out</span>}
               </NavLink>
             </li>
           </ul>
