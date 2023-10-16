@@ -56,6 +56,16 @@
   background-color: #c9e1fd;
 }
 
+.signOutLink {
+  color: #111;
+  background-color: #d6e9ffc0;
+}
+
+.signOutLink:hover {
+  color: #000000;
+  background-color: #d6e9ff;
+}
+
 @media (max-width: 900px) {
   .sidebar {
     width: 10rem;

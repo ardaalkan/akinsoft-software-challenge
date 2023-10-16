@@ -87,7 +87,7 @@ export default function Sidebar() {
             <li>
               <NavLink
                 style={{ textDecoration: "none" }}
-                className={classNameFunc}
+                className={styles.signOutLink}
                 onClick={handleSignOut}
               >
                 <LogOut style={{ marginRight: "25px" }} />
