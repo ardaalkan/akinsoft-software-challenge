@@ -6,6 +6,7 @@ import All from "./pages/All/All";
 import Home from "./pages/Home/Home";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRouter/PrivateRoute";
+
 export default function App() {
   return (
     <BrowserRouter>

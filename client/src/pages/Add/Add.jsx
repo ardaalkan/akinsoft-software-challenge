@@ -2,11 +2,12 @@ import { useState } from "react";
 import Select from "react-select";
 import styles from "./Add.module.css";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Add() {
   const { currentUser } = useSelector((state) => state.user);
 
-  // Kategori seçenekleri
   const categoryOptions = [
     { value: "category1", label: "Category 1" },
     { value: "category2", label: "Category 2" },
@@ -50,6 +51,17 @@ export default function Add() {
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
+      } else {
+        // Form gönderildikten sonra inputları temizle
+        setFormData({
+          name: "",
+          details: "",
+          category: "",
+        });
+        toast.success("Anket başariyla eklendi!", {
+          position: "top-right",
+          autoClose: 3000, // 3 saniye sonra otomatik kapanır
+        });
       }
     } catch (error) {
       setError(error.message);
@@ -85,8 +97,12 @@ export default function Add() {
             required
             name="category"
             options={categoryOptions}
-            onChange={(selectedOption) => setFormData({ ...formData, category: selectedOption.value })}
-            value={categoryOptions.find((option) => option.value === formData.category)}
+            onChange={(selectedOption) =>
+              setFormData({ ...formData, category: selectedOption.value })
+            }
+            value={categoryOptions.find(
+              (option) => option.value === formData.category
+            )}
           />
         </label>
         <button className={styles.btn}>
