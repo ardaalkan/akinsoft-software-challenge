@@ -5,6 +5,7 @@ import Image from "../../assets/images/survey_app_image.jpg";
 import Avatar from "./Avatar/Avatar";
 import styles from "./Sidebar.module.css";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   signOutStart,
   signOutSuccess,
@@ -26,6 +27,8 @@ export default function Sidebar() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const { currentUser } = useSelector((state) => state.user);
 
   const handleSignOut = async () => {
     try {
@@ -50,7 +53,7 @@ export default function Sidebar() {
       <div className={styles.sidebarContent}>
         <div className={styles.user}>
           <Avatar src={Image}></Avatar>
-          <p className={styles.userText}>Welcome!</p>
+          <p className={styles.userText}>Welcome! <br/>{currentUser.username}</p>
         </div>
         <nav className={styles.links}>
           <ul>

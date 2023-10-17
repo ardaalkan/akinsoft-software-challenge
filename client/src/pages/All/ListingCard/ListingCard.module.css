@@ -1,0 +1,44 @@
+.listingCard {
+  margin: 15rem;
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.listingBtns {
+  display: flex;
+  flex-direction: column;
+}
+
+.listingBtns span {
+  padding: 10px;
+  margin: 5px;
+  background-color: #ebebeb;
+  cursor: pointer;
+}
+
+.listingBtns span:hover {
+  background-color: #ebebebc0;
+}
+
+.listingEdit {
+  color: green;
+}
+
+.listingDelete {
+  color: red;
+}
+
+.listing-card h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.listing-card p {
+  font-size: 16px;
+  color: #333;
+}

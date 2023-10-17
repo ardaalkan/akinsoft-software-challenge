@@ -7,7 +7,7 @@ export default function Layout() {
   return (
     <>
       <Header />
-      <Sidebar/>
+      <Sidebar />
       <Outlet />
       <Footer />
     </>

@@ -52,13 +52,16 @@ export default function Add() {
       if (data.success === false) {
         setError(data.message);
       } else {
-        // Form gönderildikten sonra inputları temizle
+        /*
+           Form gönderildikten sonra inputları temizlemek için model 
+           ifadeleri tekrar ilk halindeki gibi boş string olarak tanımlanır.
+         */
         setFormData({
           name: "",
           details: "",
           category: "",
         });
-        toast.success("Anket başariyla eklendi!", {
+        toast.success("Your survey added successfully", {
           position: "top-right",
           autoClose: 3000, // 3 saniye sonra otomatik kapanır
         });
