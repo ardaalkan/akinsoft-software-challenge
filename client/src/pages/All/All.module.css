@@ -1,3 +1,9 @@
-.listingContainer{
-    margin-left: 22rem;
+.listingContainer {
+  margin-left: 22rem;
+}
+
+@media (max-width: 900px) {
+  .listingContainer {
+    margin-left: 12rem;
+  }
 }

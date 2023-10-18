@@ -1,4 +1,5 @@
-import styles from "./ListingCard.module.css"; // CSS modülünü içe aktarın
+import styles from "./ListingCard.module.css";
+import { Link } from "react-router-dom";
 
 function ListingCard({ data, onDeleteClick }) {
   return (
@@ -8,7 +9,9 @@ function ListingCard({ data, onDeleteClick }) {
         <p>{data.details}</p>
       </div>
       <div className={styles.listingBtns}>
-        <span className={styles.listingEdit}>Edit</span>
+        <Link to={`/update/${data._id}`}>
+          <span className={styles.listingEdit}>Edit</span>
+        </Link>
         <span
           className={styles.listingDelete}
           onClick={() => onDeleteClick(data._id)}

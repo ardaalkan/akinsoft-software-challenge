@@ -1,5 +1,4 @@
 .listingCard {
-  margin: 15rem;
   border: 1px solid #ccc;
   padding: 16px;
   margin: 8px;
@@ -16,7 +15,7 @@
 
 .listingBtns span {
   padding: 10px;
-  margin: 5px;
+  margin: 15px;
   background-color: #ebebeb;
   cursor: pointer;
 }

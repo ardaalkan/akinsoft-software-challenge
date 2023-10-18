@@ -6,6 +6,7 @@ import All from "./pages/All/All";
 import Home from "./pages/Home/Home";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRouter/PrivateRoute";
+import Update from "./pages/Update/Update";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
             <Route path="/" element={<Home />}/>
             <Route path="/all" element={<All />}/>
             <Route path="/add" element={<Add />}/>
+            <Route path="/update/:id" element={<Update />}/>
           </Route>
         </Route>
         <Route path="sign-in" element={<SignIn />} />
