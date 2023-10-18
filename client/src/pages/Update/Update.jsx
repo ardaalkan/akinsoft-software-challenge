@@ -4,7 +4,7 @@ import styles from "./Update.module.css";
 import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from 'react-toastify'; // Toast eklemeyi unutmayın
+import { toast } from "react-toastify"; // Toast eklemeyi unutmayın
 
 export default function Add() {
   const { currentUser } = useSelector((state) => state.user);
@@ -23,13 +23,10 @@ export default function Add() {
   });
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
-  
-  // listingId'yi tanımlayın
   const listingId = params.id;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -49,12 +46,12 @@ export default function Add() {
   }, [listingId]);
 
   const handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(listingId, 'listingId') 
-      try {
-          setLoading(true);
-          setError(false);
-      const res = await fetch(`/api/listing/update/${listingId}`, { 
+    e.preventDefault();
+    console.log(listingId, "listingId");
+    try {
+      setLoading(true);
+      setError(false);
+      const res = await fetch(`/api/listing/update/${listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -65,7 +62,7 @@ export default function Add() {
         }),
       });
       const data = await res.json();
-      console.log(data._id, 'data')
+      console.log(data._id, "data");
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
