@@ -2,6 +2,7 @@
 A fullstack web survey application case challenge of Akınsoft
 
 ```bash
+npm i
 npm run start-dev
 ```
 | **Dependency**     | **Use**                                                                               |
