@@ -5,21 +5,25 @@ import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-export default function Add() {
+export default function Answer() {
+  // Redux kullanarak oturum açmış kullanıcı bilgilerini alır
   const { currentUser } = useSelector((state) => state.user);
+  // React Router'ın "useParams" özelliği ile URL'den parametreleri alır
   const params = useParams();
   const navigate = useNavigate();
 
+  // Form verileri için bir "formData" durumu tanımlanır
   const [formData, setFormData] = useState({
     name: "",
     details: "",
     answer: "",
     category: "",
   });
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const listingId = params.id;
+  const [error, setError] = useState(false); // Hata durumu
+  const [loading, setLoading] = useState(false); // Yükleme durumu
+  const listingId = params.id; // Anket kimliği, URL'den alınır
 
+  // Formdaki veri değişikliklerini dinleyen bir fonksiyon
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -28,6 +32,7 @@ export default function Add() {
     }));
   };
 
+  // Sayfa yüklendiğinde, belirli bir anketin verilerini getiren bir etki alanı fonksiyonu
   useEffect(() => {
     const fetchListing = async () => {
       const res = await fetch(`/api/listing/get/${listingId}`);
@@ -40,6 +45,7 @@ export default function Add() {
     fetchListing();
   }, [listingId]);
 
+  // Form gönderildiğinde çalışan bir fonksiyon
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(listingId, "listingId");
@@ -62,9 +68,11 @@ export default function Add() {
       if (data.success === false) {
         setError(data.message);
       } else {
+        // Başarılı bir şekilde yanıtlandığında başarılı bir bildirim görüntülenir
         toast.success("Answer successfully received!", {
           position: "top-right",
         });
+        // Yanıtın gönderildikten sonra "all" sayfasına yönlendirilir
         navigate(`/all`);
       }
     } catch (error) {

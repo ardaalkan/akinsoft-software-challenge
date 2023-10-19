@@ -3,11 +3,12 @@ import styles from "./SignUp.module.css";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({}); // Kullanıcının kayıt bilgilerini saklayan bir durum
+  const [error, setError] = useState(null); // Hata mesajı saklanır
+  const [loading, setLoading] = useState(false); // Kayıt işlemi sırasında yüklenme durumu saklanır
   const navigate = useNavigate();
 
+  // Kullanıcının kayıt bilgilerini güncellemek için kullanılan bir fonksiyon
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -15,6 +16,7 @@ export default function SignUp() {
     });
   };
 
+  // Kayıt formu gönderildiğinde çalışan fonksiyon
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -34,15 +36,13 @@ export default function SignUp() {
       }
       setLoading(false);
       setError(null);
-      navigate('/sign-in');
+      navigate("/sign-in");
       console.log(data);
     } catch (error) {
       setLoading(false);
       setError(error.message);
     }
   };
-
-  console.log(formData);
 
   return (
     <div className={styles.pageContainer}>
@@ -78,7 +78,7 @@ export default function SignUp() {
           <h2>Sign In</h2>
         </Link>
       </div>
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>} {/* Hata mesajı gösterilir */}
     </div>
   );
 }

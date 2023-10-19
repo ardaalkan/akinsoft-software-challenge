@@ -6,8 +6,10 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Add() {
+  // Redux'tan "currentUser" bilgisini al
   const { currentUser } = useSelector((state) => state.user);
 
+  // Kategori seçenekleri
   const categoryOptions = [
     { value: "Software", label: "Software" },
     { value: "Backend", label: "Backend" },
@@ -15,15 +17,18 @@ export default function Add() {
     { value: "DevOps", label: "DevOps" },
   ];
 
+  // Form verilerini saklayacak state
   const [formData, setFormData] = useState({
     name: "",
     details: "",
     category: "",
   });
-  console.log(formData);
+
+  // Hata ve yükleme durumu
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Input değişikliklerini ele alacak fonksiyon
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -33,6 +38,7 @@ export default function Add() {
     }));
   };
 
+  // Form gönderildiğinde yapılacak işlemler
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -53,15 +59,15 @@ export default function Add() {
       if (data.success === false) {
         setError(data.message);
       } else {
-        /*
-           Form gönderildikten sonra inputları temizlemek için model 
-           ifadeleri tekrar ilk halindeki gibi boş string olarak tanımlanır.
-         */
+        // Form gönderildikten sonra inputları temizlemek için model ifadeleri
+        // tekrar ilk halindeki gibi boş string olarak tanımlanır.
         setFormData({
           name: "",
           details: "",
           category: "",
         });
+
+        // Başarılı bir şekilde eklendiğine dair bir bildirim gösterilir.
         toast.success("Your survey added successfully", {
           position: "top-right",
           autoClose: 3000, // 3 saniye sonra otomatik kapanır.

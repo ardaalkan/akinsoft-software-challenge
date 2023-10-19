@@ -5,9 +5,14 @@ export const test = (req, res) => {
     message: "API Route is Working",
   });
 };
+/*
+test: Bu işlev, /test yoluna gelen HTTP GET isteği üzerine çalışır. İsteğe 
+yanıt olarak bir JSON nesnesi gönderir 
+ve bu nesnenin içeriği "API Route is Working" mesajını içerir. 
+Bu, API'nizin çalışıp çalışmadığını test etmek için basit bir yol sağlar.
+*/
 
 export const getUserListings = async (req, res, next) => {
-  
   if (req.id === req.id) {
     try {
       const listings = await Listing.find({ userRef: req.params.id });
@@ -19,3 +24,14 @@ export const getUserListings = async (req, res, next) => {
     return next(errorHandler(401, 'You can only view your own listings!'));
   }
 };
+/*
+getUserListings: Bu işlev, /listings/:id yoluna gelen HTTP GET isteği üzerine çalışır. 
+İsteği işlerken, önce gelen isteğin req.params.id değerini alır. Daha sonra bu id değeri 
+ile kullanıcının kendi listelerini bulur. Eğer istemci, req.params.id değerini kendi 
+kimliği ile (örneğin, kullanıcı kimliği) uyuştuğu takdirde, bu kullanıcının listelerini 
+veritabanından çeker ve 200 HTTP durum kodu ile birlikte bu listeleri JSON formatında 
+yanıt olarak gönderir. Eğer kullanıcı kimliği uyuşmazsa 
+(yani, başkasının listelerini almaya çalışırsa), 
+bir hata mesajı döndürür ve HTTP 401 (Unauthorized) 
+durum kodu ile birlikte "You can only view your own listings!" mesajını döndürür.
+*/

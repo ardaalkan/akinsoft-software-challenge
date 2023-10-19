@@ -4,19 +4,22 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 export default function Home() {
-  const [userListings, setUserListings] = useState([]);
-  const { currentUser } = useSelector((state) => state.user);
+  const [userListings, setUserListings] = useState([]); // Kullanıcının anketlerinin listesini içeren bir durum
+  const { currentUser } = useSelector((state) => state.user); // Redux ile oturum açmış kullanıcı bilgileri alınır
 
+  // Kullanıcının anketlerini getirmek için kullanılan bir fonksiyon
   const handleShowListings = async () => {
     const res = await fetch(`/api/user/listings/${currentUser._id}`);
     const data = await res.json();
     setUserListings(data);
   };
 
+  // Sayfa yüklendiğinde anketleri getirmek için kullanılan etki alanı fonksiyonu
   useEffect(() => {
-    handleShowListings(); // Sayfa yüklendiğinde listeleri getirir.
-  }, []); // bağımlılık dizisi ve ingilizcede "dependency array" olarak geçer.
+    handleShowListings();
+  }, []);
 
+  // Kullanıcının sahip olduğu toplam anket sayısını hesaplar
   const numberOfListings = userListings.length;
 
   return (

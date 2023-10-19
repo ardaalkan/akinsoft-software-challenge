@@ -9,11 +9,12 @@ import {
 } from "../../redux/user/userSlice";
 
 export default function SignIn() {
-  const [formData, setFormData] = useState({});
-  const { loading, error } = useSelector((state) => state.user);
+  const [formData, setFormData] = useState({}); // Kullanıcının giriş bilgilerini saklayan bir durum
+  const { loading, error } = useSelector((state) => state.user); // Redux ile giriş işlemi hakkında bilgi alınır
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // Kullanıcının giriş bilgilerini güncellemek için kullanılan bir fonksiyon
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -21,6 +22,7 @@ export default function SignIn() {
     });
   };
 
+  // Giriş formu gönderildiğinde çalışan fonksiyon
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -72,7 +74,8 @@ export default function SignIn() {
           <h2>Sign Up</h2>
         </Link>
       </div>
-      {error && <p className={styles.errorContainer}>{error}</p>}
+      {error && <p className={styles.errorContainer}>{error}</p>}{" "}
+      {/* Hata mesajı gösterilir */}
     </div>
   );
 }

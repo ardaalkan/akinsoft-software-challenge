@@ -5,6 +5,8 @@ import styles from "../All/All.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+const ADD_SURVEY_REMINDER = "You don't have any surveys. Please create.";
+
 export default function All() {
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
@@ -49,12 +51,17 @@ export default function All() {
 
   useEffect(() => {
     handleShowListings(); // Sayfa yüklendiğinde listeleri getirir.
-  }, []); // bağımlılık dizisi ve ingilizcede "dependency array" olarak geçer.
+  }, []); // bağımlılık dizisi ve İngilizcede "dependency array" olarak geçer.
+
+  console.log(userListings.length, "length!!!!");
 
   return (
     <div className={styles.listingContainer}>
       <h1 style={{ textAlign: "left", margin: "10px" }}>All Survey</h1>
       {showListingsError && <p>Hata oluştu.</p>}
+      {userListings.length === 0 && (
+        <p className={styles.reminder}>{ADD_SURVEY_REMINDER}</p>
+      )}
       <div>
         {userListings.map((listing, index) => (
           <ListingCard

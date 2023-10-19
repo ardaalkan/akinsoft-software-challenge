@@ -1,6 +1,12 @@
+// Hata işlevi, belirli bir duruma göre özel bir hata oluşturur.
 export const errorHandler = (statusCode, message) => {
-    const error = new Error();
-    error.statusCode = statusCode;
-    error.message = message;
-    return error;
-} 
+  // Yeni bir hata nesnesi oluştur
+  const error = new Error();
+
+  // Hata durumunu ve iletiyi ayarla
+  error.statusCode = statusCode;
+  error.message = message;
+
+  // Oluşturulan hatayı döndür
+  return error;
+};

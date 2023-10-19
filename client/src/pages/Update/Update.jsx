@@ -4,12 +4,12 @@ import styles from "./Update.module.css";
 import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { toast } from "react-toastify"; // Toast eklemeyi unutmayın
+import { toast } from "react-toastify";
 
-export default function Add() {
-  const { currentUser } = useSelector((state) => state.user);
-  const params = useParams();
-  const navigate = useNavigate();
+export default function Update() {
+  const { currentUser } = useSelector((state) => state.user); // Redux'tan kullanıcı bilgileri alınır
+  const params = useParams(); // URL parametreleri alınır
+  const navigate = useNavigate(); // Sayfa yönlendirme işlemleri için kullanılır
   const categoryOptions = [
     { value: "Frontend", label: "Frontend" },
     { value: "Backend", label: "Backend" },
@@ -20,11 +20,12 @@ export default function Add() {
     name: "",
     details: "",
     category: "",
-  });
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const listingId = params.id;
+  }); // Kayıt bilgilerini saklayan bir durum
+  const [error, setError] = useState(false); // Hata mesajını saklar
+  const [loading, setLoading] = useState(false); // Kaydetme işlemi sırasında yüklenme durumunu saklar
+  const listingId = params.id; // URL'den gelen kayıt kimliği
 
+  // Kayıt bilgileri değiştiğinde çalışan fonksiyon
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
@@ -33,6 +34,7 @@ export default function Add() {
     }));
   };
 
+  // Sayfa yüklendiğinde, belirtilen kayıt bilgilerini getirir
   useEffect(() => {
     const fetchListing = async () => {
       const res = await fetch(`/api/listing/get/${listingId}`);
@@ -45,9 +47,9 @@ export default function Add() {
     fetchListing();
   }, [listingId]);
 
+  // Kayıt güncelleme formu gönderildiğinde çalışan fonksiyon
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(listingId, "listingId");
     try {
       setLoading(true);
       setError(false);
@@ -62,11 +64,11 @@ export default function Add() {
         }),
       });
       const data = await res.json();
-      console.log(data._id, "data");
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
       } else {
+        // Başarılı bir şekilde güncellendiğinde bildirim gösterilir ve kullanıcı yönlendirilir
         toast.success("Successfully updated!", { position: "top-right" });
         navigate(`/all`);
       }

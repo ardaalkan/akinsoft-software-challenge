@@ -2,6 +2,13 @@
   margin-left: 22rem;
 }
 
+.reminder{
+  padding: 15px;
+  margin: 0px 10px;
+  background-color: #c4dea4;
+  border-radius: 15px;
+}
+
 @media (max-width: 900px) {
   .listingContainer {
     margin-left: 12rem;

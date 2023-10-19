@@ -8,23 +8,25 @@ import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRouter/PrivateRoute";
 import Update from "./pages/Update/Update";
 import Answer from "./pages/Answer/Answer";
-// Arda Alkan
-// 19.10.2023
+
+// Ana uygulama bileşeni
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Özel rotaları koruma */}
         <Route element={<PrivateRoute />}>
+          {/* Ana düzen bileşeni */}
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />} />
-            <Route path="/all" element={<All />} />
-            <Route path="/add" element={<Add />} />
-            <Route path="/update/:id" element={<Update />} />
-            <Route path="/answer/:id" element={<Answer />} />
+            <Route path="/" element={<Home />} />  {/* Ana sayfa */}
+            <Route path="/all" element={<All />} />  {/* Tüm anketler */}
+            <Route path="/add" element={<Add />} />  {/* Yeni anket ekleme */}
+            <Route path="/update/:id" element={<Update />} />  {/* Anket güncelleme */}
+            <Route path="/answer/:id" element={<Answer />} />  {/* Anket yanıtlama */}
           </Route>
         </Route>
-        <Route path="sign-in" element={<SignIn />} />
-        <Route path="sign-up" element={<Signup />} />
+        <Route path="sign-in" element={<SignIn />} />  {/* Giriş yapma sayfası */}
+        <Route path="sign-up" element={<Signup />} />  {/* Kayıt olma sayfası */}
       </Routes>
     </BrowserRouter>
   );

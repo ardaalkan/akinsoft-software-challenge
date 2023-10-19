@@ -9,20 +9,23 @@ export const createListing = async (req, res, next) => {
     next(error);
   }
 };
+/*
+createListing: Yeni bir "listing" oluşturmak için kullanılır. HTTP isteği ile gelen verilere dayalı 
+olarak yeni bir "listing" oluşturur ve oluşturulan "listing"i yanıt olarak döner. 
+Eğer işlem başarısız olursa, bir hata oluşursa, bu hatayı sonraki işleme (middleware) iletir. 
+*/
 
 export const deleteListing = async (req, res, next) => {
   await Listing.findByIdAndDelete(req.params.id);
   res.status(200).json("Listing has been deleted!");
 };
+/*
+deleteListing: Bir "listing"i silmek için kullanılır. 
+HTTP isteği ile gelen id parametresine göre belirli bir "listing"i siler 
+ve başarılı bir yanıt döner. Herhangi bir hata oluşmazsa, işlemi sonlandırır.
+*/
 
 export const updateListing = async (req, res, next) => {
-  // const listing = await Listing.findById(req.params.id);
-  // if (!listing) {
-  //   return next(errorHandler(404, "Listing not found!"));
-  // }
-  // if (req.user.id !== listing.userRef) {
-  //   return next(errorHandler(401, "You can only update your own listings!"));
-  // }
   try {
     const updatedListing = await Listing.findByIdAndUpdate(
       req.params.id,
@@ -34,6 +37,13 @@ export const updateListing = async (req, res, next) => {
     next(error);
   }
 };
+/*
+updateListing: Mevcut bir "listing"i güncellemek için kullanılır. 
+HTTP isteği ile gelen id parametresine ve güncellenmiş verilere dayalı olarak bir 
+"listing"i günceller. Güncellenen "listing"i yanıt olarak döner. 
+Eğer güncelleme işlemi başarısız olursa, bir hata oluşursa, 
+bu hatayı sonraki işleme iletir.
+*/
 
 export const getListing = async (req, res, next) => {
   try {
@@ -46,5 +56,11 @@ export const getListing = async (req, res, next) => {
     next(error);
   }
 };
-
-// // // // // // // answerListing
+/*
+getListing: Belirli bir "listing"i almak için kullanılır. 
+HTTP isteği ile gelen id parametresine göre belirli bir "listing"i 
+veritabanından alır ve yanıt olarak döner. 
+Eğer belirli bir "listing" bulunamazsa, 
+404 HTTP durum kodu ile birlikte bir hata oluşturur ve 
+bu hatayı sonraki işleme iletir.
+*/

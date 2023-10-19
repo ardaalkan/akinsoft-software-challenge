@@ -17,6 +17,7 @@ export default function Sidebar() {
   const breakpoint = 720;
   const dispatch = useDispatch();
 
+  // Tarayıcı penceresi yeniden boyutlandığında sayfa genişliğini günceller.
   useEffect(() => {
     const handleResize = () => {
       setWidth(window.innerWidth);
@@ -28,8 +29,10 @@ export default function Sidebar() {
     };
   }, []);
 
+  // Redux store'dan kullanıcının bilgilerini alır.
   const { currentUser } = useSelector((state) => state.user);
 
+  // Kullanıcı oturumunu kapatma işlemini gerçekleştirir.
   const handleSignOut = async () => {
     try {
       dispatch(signOutStart());
@@ -46,6 +49,7 @@ export default function Sidebar() {
     }
   };
 
+  // Aktif bağlantıyı vurgulamak için kullanılan sınıfı döndüren bir işlev.
   const classNameFunc = ({ isActive }) => (isActive ? styles.activeLink : "");
 
   return (
@@ -53,7 +57,10 @@ export default function Sidebar() {
       <div className={styles.sidebarContent}>
         <div className={styles.user}>
           <Avatar src={Image}></Avatar>
-          <p className={styles.userText}>Welcome! <br/>{currentUser.username}</p>
+          <p className={styles.userText}>
+            Welcome! <br />
+            {currentUser.username}
+          </p>
         </div>
         <nav className={styles.links}>
           <ul>
