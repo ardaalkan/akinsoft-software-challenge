@@ -8,7 +8,8 @@ import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRouter/PrivateRoute";
 import Update from "./pages/Update/Update";
 import Answer from "./pages/Answer/Answer";
-
+// Arda Alkan
+// 19.10.2023
 export default function App() {
   return (
     <BrowserRouter>

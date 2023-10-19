@@ -5,23 +5,12 @@ import { useSelector } from "react-redux";
 
 export default function Home() {
   const [userListings, setUserListings] = useState([]);
-  const [showListingsError, setShowListingsError] = useState(false);
   const { currentUser } = useSelector((state) => state.user);
 
   const handleShowListings = async () => {
-    try {
-      setShowListingsError(false);
-      const res = await fetch(`/api/user/listings/${currentUser._id}`);
-      const data = await res.json();
-      console.log(data, "data");
-      if (data.success === false) {
-        setShowListingsError(true);
-        return;
-      }
-      setUserListings(data);
-    } catch (error) {
-      setShowListingsError(true);
-    }
+    const res = await fetch(`/api/user/listings/${currentUser._id}`);
+    const data = await res.json();
+    setUserListings(data);
   };
 
   useEffect(() => {

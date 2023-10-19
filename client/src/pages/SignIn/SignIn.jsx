@@ -10,7 +10,7 @@ import {
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const { loading, error} = useSelector((state) => state.user);
+  const { loading, error } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -44,8 +44,6 @@ export default function SignIn() {
       dispatch(signInFailure(error.message));
     }
   };
-
-  console.log(formData);
 
   return (
     <div className={styles.pageContainer}>
