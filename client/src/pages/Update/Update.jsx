@@ -11,9 +11,9 @@ export default function Add() {
   const params = useParams();
   const navigate = useNavigate();
   const categoryOptions = [
-    { value: "category1", label: "Category 1" },
-    { value: "category2", label: "Category 2" },
-    { value: "category3", label: "Category 3" },
+    { value: "Frontend", label: "Frontend" },
+    { value: "Backend", label: "Backend" },
+    { value: "DevOps", label: "DevOps" },
   ];
 
   const [formData, setFormData] = useState({

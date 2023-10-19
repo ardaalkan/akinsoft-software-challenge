@@ -1,44 +1,52 @@
-import { useState } from "react";
-import Select from "react-select";
-import styles from "./Add.module.css";
+import { useState, useEffect } from "react";
+import styles from "./Answer.module.css";
 import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Add() {
   const { currentUser } = useSelector((state) => state.user);
-
-  const categoryOptions = [
-    { value: "Software", label: "Software" },
-    { value: "Backend", label: "Backend" },
-    { value: "Frontend", label: "Frontend" },
-    { value: "DevOps", label: "DevOps" },
-  ];
+  const params = useParams();
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     name: "",
     details: "",
+    answer: "",
     category: "",
   });
-  console.log(formData);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const listingId = params.id;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
 
+  useEffect(() => {
+    const fetchListing = async () => {
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      if (data.success === false) {
+        return;
+      }
+      setFormData(data);
+    };
+    fetchListing();
+  }, [listingId]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(listingId, "listingId");
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
+      const res = await fetch(`/api/listing/update/${listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,23 +57,15 @@ export default function Add() {
         }),
       });
       const data = await res.json();
+      console.log(data._id, "data");
       setLoading(false);
       if (data.success === false) {
         setError(data.message);
       } else {
-        /*
-           Form gönderildikten sonra inputları temizlemek için model 
-           ifadeleri tekrar ilk halindeki gibi boş string olarak tanımlanır.
-         */
-        setFormData({
-          name: "",
-          details: "",
-          category: "",
-        });
-        toast.success("Your survey added successfully", {
+        toast.success("Answer successfully received!", {
           position: "top-right",
-          autoClose: 3000, // 3 saniye sonra otomatik kapanır.
         });
+        navigate(`/all`);
       }
     } catch (error) {
       setError(error.message);
@@ -75,7 +75,7 @@ export default function Add() {
 
   return (
     <div className={styles.main}>
-      <h2>Create New Survey</h2>
+      <h2>Answer the Survey</h2>
       <form onSubmit={handleSubmit}>
         <label>
           <span>Survey Name:</span>
@@ -84,33 +84,30 @@ export default function Add() {
             name="name"
             onChange={handleChange}
             value={formData.name}
+            disabled
           ></input>
         </label>
         <label>
-          <span>Survey Details:</span>
+          <span>Survey Question Details:</span>
           <textarea
             required
             name="details"
             onChange={handleChange}
             value={formData.details}
+            disabled
           ></textarea>
         </label>
         <label>
-          <span>Survey Category:</span>
-          <Select
+          <span>Answer the Survey</span>
+          <textarea
             required
-            name="category"
-            options={categoryOptions}
-            onChange={(selectedOption) =>
-              setFormData({ ...formData, category: selectedOption.value })
-            }
-            value={categoryOptions.find(
-              (option) => option.value === formData.category
-            )}
-          />
+            name="answer"
+            onChange={handleChange}
+            value={formData.answer}
+          ></textarea>
         </label>
         <button className={styles.btn}>
-          {loading ? "Adding" : "Add Survey"}
+          {loading ? "Loading" : "Answer Survey"}
         </button>
         <p>{error && <p>{error}</p>}</p>
       </form>

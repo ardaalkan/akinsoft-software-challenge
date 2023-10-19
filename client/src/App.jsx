@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import Layout from "./components/Layout/Layout";
 import PrivateRoute from "./components/PrivateRouter/PrivateRoute";
 import Update from "./pages/Update/Update";
+import Answer from "./pages/Answer/Answer";
 
 export default function App() {
   return (
@@ -14,10 +15,11 @@ export default function App() {
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route element={<Layout />}>
-            <Route path="/" element={<Home />}/>
-            <Route path="/all" element={<All />}/>
-            <Route path="/add" element={<Add />}/>
-            <Route path="/update/:id" element={<Update />}/>
+            <Route path="/" element={<Home />} />
+            <Route path="/all" element={<All />} />
+            <Route path="/add" element={<Add />} />
+            <Route path="/update/:id" element={<Update />} />
+            <Route path="/answer/:id" element={<Answer />} />
           </Route>
         </Route>
         <Route path="sign-in" element={<SignIn />} />
