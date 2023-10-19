@@ -1,0 +1,33 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25rem;
+  color: aliceblue;
+}
+
+.container h1 {
+  color: black;
+}
+
+.main {
+  margin-top: 3rem;
+  font-size: 40px;
+  display: flex;
+}
+
+.box {
+  background-color: #3498db;
+  font-size: 40px;
+  width: 250px;
+  height: 250px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.boxInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

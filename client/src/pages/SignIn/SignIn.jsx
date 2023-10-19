@@ -74,7 +74,7 @@ export default function SignIn() {
           <h2>Sign Up</h2>
         </Link>
       </div>
-      {error && <p>{error}</p>}
+      {error && <p className={styles.errorContainer}>{error}</p>}
     </div>
   );
 }
