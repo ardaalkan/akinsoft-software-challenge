@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom"; // ReactDOM importu düzeltilmiş
+import ReactDOM from "react-dom";
 import App from "./App.jsx";
 import "./index.css";
 import { persistor, store } from "./redux/store.js";

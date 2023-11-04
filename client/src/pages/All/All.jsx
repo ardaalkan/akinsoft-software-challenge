@@ -17,7 +17,7 @@ export default function All() {
       setShowListingsError(false);
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
-      console.log(data, "data");
+      // console.log(data, "data");
       if (data.success === false) {
         setShowListingsError(true);
         return;
@@ -52,8 +52,6 @@ export default function All() {
   useEffect(() => {
     handleShowListings(); // Sayfa yüklendiğinde listeleri getirir.
   }, []); // bağımlılık dizisi ve İngilizcede "dependency array" olarak geçer.
-
-  console.log(userListings.length, "length!!!!");
 
   return (
     <div className={styles.listingContainer}>
