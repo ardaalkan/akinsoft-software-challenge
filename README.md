@@ -1,10 +1,14 @@
 # akinsoft-software-challenge
-A fullstack web survey application case challenge of Akınsoft
+Akınsoft full stack web survey application sample challenge/case
 
 ```bash
 npm i
-npm run start-dev
 ```
+
+```bash
+npm run dev
+```
+
 | **Dependency**     | **Use**                                                                               |
 | ----------------   | --------------------------------------------------------------------------------------|
 | cookie-parser      | Parse HTTP request cookies.                                                           |
