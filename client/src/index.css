@@ -42,7 +42,7 @@ label span {
 }
 input,
 textarea {
-  padding: 8px 6px;
+  padding: 8px 3px;
   font-size: 1.3em;
   color: #777;
   width: 100%;
@@ -51,7 +51,7 @@ textarea {
   border-radius: 4px;
 }
 textarea {
-  min-height: 160px;
+  min-height: 100px;
 }
 .error {
   color: red;
@@ -76,7 +76,6 @@ textarea {
     flex-direction: column;
   }
 }
-
 
 .btn {
   background: #fff;

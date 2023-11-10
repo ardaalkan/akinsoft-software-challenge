@@ -18,7 +18,7 @@ function ListingCard({ data, onDeleteClick }) {
         </Link>
 
         {/* Anketi yanıtlama sayfasına yönlendiren bir Link oluşturulur */}
-        <Link to={`/answer/${data._id}`}>
+        <Link to={`/${data._id}`}>
           <p>Answer</p>
         </Link>
 

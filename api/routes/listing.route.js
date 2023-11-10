@@ -16,7 +16,7 @@ router.post("/create", createListing);
 router.delete("/delete/:id", deleteListing);
 
 // "/update/:id" yoluna gelen POST isteğini "updateListing" işlevine yönlendir
-router.post("/update/:id", updateListing);
+router.post("/:id", updateListing);
 
 // "/get/:id" yoluna gelen GET isteğini "getListing" işlevine yönlendir
 router.get("/get/:id", getListing);

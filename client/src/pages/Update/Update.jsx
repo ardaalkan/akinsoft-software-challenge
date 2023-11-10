@@ -112,6 +112,7 @@ export default function Update() {
             value={categoryOptions.find(
               (option) => option.value === formData.category
             )}
+            noOptionsMessage="ekle"
           />
         </label>
         <button className={styles.btn}>

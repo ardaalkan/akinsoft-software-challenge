@@ -52,7 +52,7 @@ export default function Answer() {
     try {
       setLoading(true);
       setError(false);
-      const res = await fetch(`/api/listing/update/${listingId}`, {
+      const res = await fetch(`/api/listing/${listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -82,43 +82,57 @@ export default function Answer() {
   };
 
   return (
-    <div className={styles.main}>
-      <h2>Answer the Survey</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>Survey Name:</span>
-          <input
-            type="text"
-            name="name"
-            onChange={handleChange}
-            value={formData.name}
-            disabled
-          ></input>
-        </label>
-        <label>
-          <span>Survey Question Details:</span>
-          <textarea
-            required
-            name="details"
-            onChange={handleChange}
-            value={formData.details}
-            disabled
-          ></textarea>
-        </label>
-        <label>
-          <span>Answer the Survey</span>
-          <textarea
-            required
-            name="answer"
-            onChange={handleChange}
-            value={formData.answer}
-          ></textarea>
-        </label>
-        <button className={styles.btn}>
-          {loading ? "Loading" : "Answer Survey"}
-        </button>
-        <p>{error && <p>{error}</p>}</p>
-      </form>
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.formStyle}>
+          <div className={styles.fullWidthElement} />
+          <div className={styles.detailContainer}>
+            <div className={styles.fullWidthElementLeft} />
+            <div className={styles.formInfo}>
+              <span>React.js Survey</span>
+              <br />
+              <span>A Survey About React.js and Librarys</span>
+              <h2>Answer the Survey</h2>
+            </div>
+          </div>
+        </div>
+        <form onSubmit={handleSubmit} className={styles.mainFormContainer}>
+          <div className={styles.labelGroup}>
+            <label>
+              <input
+                type="text"
+                name="name"
+                onChange={handleChange}
+                value={formData.name}
+                disabled
+                className={styles.formInputStyle}
+              ></input>
+            </label>
+            <label>
+              <input
+                required
+                name="details"
+                onChange={handleChange}
+                value={formData.details}
+                disabled
+                className={styles.textareaStyle}
+              ></input>
+            </label>
+            <label className={styles.answerDetailContainer}>
+              <textarea
+                required
+                name="answer"
+                onChange={handleChange}
+                value={formData.answer}
+              ></textarea>
+            </label>{" "}
+          </div>
+          <button className={styles.btn}>
+            {loading ? "Loading" : "Answer Survey"}
+          </button>
+          <p>{error && <p>{error}</p>}</p>
+        </form>
+      </div>
     </div>
   );
 }

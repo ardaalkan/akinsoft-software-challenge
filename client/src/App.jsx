@@ -22,9 +22,9 @@ export default function App() {
             <Route path="/all" element={<All />} />  {/* Tüm anketler */}
             <Route path="/add" element={<Add />} />  {/* Yeni anket ekleme */}
             <Route path="/update/:id" element={<Update />} />  {/* Anket güncelleme */}
-            <Route path="/answer/:id" element={<Answer />} />  {/* Anket yanıtlama */}
           </Route>
         </Route>
+        <Route path="/:id" element={<Answer />} />  {/* Anket yanıtlama */}
         <Route path="sign-in" element={<SignIn />} />  {/* Giriş yapma sayfası */}
         <Route path="sign-up" element={<Signup />} />  {/* Kayıt olma sayfası */}
       </Routes>
