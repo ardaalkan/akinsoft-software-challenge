@@ -22,6 +22,10 @@ function ListingCard({ data, onDeleteClick }) {
           <p>Answer</p>
         </Link>
 
+        <Link to={`/${data._id}/response`}>
+          <p>Replies</p>
+        </Link>
+
         <span onClick={() => onDeleteClick(data._id)}>Delete</span>
       </div>
     </div>

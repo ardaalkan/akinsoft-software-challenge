@@ -22,6 +22,7 @@ export default function Add() {
     name: "",
     details: "",
     category: "",
+    question: "",
   });
 
   // Hata ve yükleme durumu
@@ -65,6 +66,7 @@ export default function Add() {
           name: "",
           details: "",
           category: "",
+          question: "",
         });
 
         // Başarılı bir şekilde eklendiğine dair bir bildirim gösterilir.
@@ -115,6 +117,18 @@ export default function Add() {
             )}
           />
         </label>
+        <label>
+          <span>Question:</span>
+          <textarea
+            required
+            name="question"
+            onChange={handleChange}
+            value={formData.question}
+          ></textarea>
+        </label>
+        <button className={styles.btn}>
+          {Add ? "Adding" : "Add Survey"}
+        </button>
         <button className={styles.btn}>
           {loading ? "Adding" : "Add Survey"}
         </button>

@@ -18,9 +18,13 @@ const listingSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    answer: {
-      type: String,
-      required: false,
+    answers: {
+      type: [String],
+      default: [],
+    },
+    question: {
+      type: [String],
+      default: [],
     },
   },
   { timestamps: true }

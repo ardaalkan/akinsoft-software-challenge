@@ -4,6 +4,8 @@ import {
   deleteListing,
   updateListing,
   getListing,
+  answerListing,
+  getAnswers,
 } from "../controllers/listing.controller.js";
 
 // Express Router oluştur
@@ -16,7 +18,13 @@ router.post("/create", createListing);
 router.delete("/delete/:id", deleteListing);
 
 // "/update/:id" yoluna gelen POST isteğini "updateListing" işlevine yönlendir
-router.post("/:id", updateListing);
+router.post('/update/:id', updateListing);
+
+//
+router.post('/:id', answerListing);
+
+//
+router.post('/:id/response', getAnswers);
 
 // "/get/:id" yoluna gelen GET isteğini "getListing" işlevine yönlendir
 router.get("/get/:id", getListing);

@@ -115,6 +115,15 @@ export default function Update() {
             noOptionsMessage="ekle"
           />
         </label>
+        <label>
+          <span>Question</span>
+          <textarea
+            required
+            name="question"
+            onChange={handleChange}
+            value={formData.question}
+          ></textarea>
+        </label>
         <button className={styles.btn}>
           {loading ? "Adding" : "Update Survey"}
         </button>

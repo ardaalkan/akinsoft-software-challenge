@@ -25,6 +25,10 @@ export default function Answer() {
 
   // Formdaki veri değişikliklerini dinleyen bir fonksiyon
   const handleChange = (event) => {
+    if (event.persist) {
+      event.persist();
+    }
+
     const { name, value } = event.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -89,9 +93,13 @@ export default function Answer() {
           <div className={styles.detailContainer}>
             <div className={styles.fullWidthElementLeft} />
             <div className={styles.formInfo}>
-              <span>React.js Survey</span>
+              <span type="text" name="name">
+                {formData.name}
+              </span>
               <br />
-              <span>A Survey About React.js and Librarys</span>
+              <span name="details" onChange={handleChange}>
+                {formData.details}
+              </span>
               <h2>Answer the Survey</h2>
             </div>
           </div>
@@ -100,20 +108,10 @@ export default function Answer() {
           <div className={styles.labelGroup}>
             <label>
               <input
-                type="text"
-                name="name"
-                onChange={handleChange}
-                value={formData.name}
-                disabled
-                className={styles.formInputStyle}
-              ></input>
-            </label>
-            <label>
-              <input
                 required
                 name="details"
                 onChange={handleChange}
-                value={formData.details}
+                value={formData.question}
                 disabled
                 className={styles.textareaStyle}
               ></input>
@@ -123,7 +121,6 @@ export default function Answer() {
                 required
                 name="answer"
                 onChange={handleChange}
-                value={formData.answer}
               ></textarea>
             </label>{" "}
           </div>

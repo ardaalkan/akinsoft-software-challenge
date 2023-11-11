@@ -24,6 +24,47 @@ export const getUserListings = async (req, res, next) => {
     return next(errorHandler(401, 'You can only view your own listings!'));
   }
 };
+
+
+// export const answerListing = async (req, res, next) => {
+//   try {
+//     const listingId = req.params.id;
+//     const newAnswer = req.body.answer;
+
+//     const listing = await Listing.findById(listingId);
+
+//     if (!listing) {
+//       return next(errorHandler(404, "Listing not found!"));
+//     }
+
+//     // Append the new answer to the answers array
+//     listing.answers.push(newAnswer);
+
+//     // Save the updated listing
+//     const updatedListing = await listing.save();
+//     console.log(newAnswer);
+
+//     res.status(200).json(updatedListing);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
+// export const getAnswers = async (listingId) => {
+//   try {
+//     const listing = await Listing.findById(listingId);
+
+//     if (!listing) {
+//       throw errorHandler(404, "Listing not found!");
+//     }
+
+//     const answers = listing.answers;
+
+//     return answers;
+//   } catch (error) {
+//     throw error;
+//   }
+// };
 /*
 getUserListings: Bu işlev, /listings/:id yoluna gelen HTTP GET isteği üzerine çalışır. 
 İsteği işlerken, önce gelen isteğin req.params.id değerini alır. Daha sonra bu id değeri 
