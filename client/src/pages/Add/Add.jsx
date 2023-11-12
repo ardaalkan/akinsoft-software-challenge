@@ -22,7 +22,7 @@ export default function Add() {
     name: "",
     details: "",
     category: "",
-    questions: [""], // Soruları bir dizi olarak sakla
+    questions: [""],
   });
 
   // Hata ve yükleme durumu

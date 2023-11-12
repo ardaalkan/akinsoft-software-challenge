@@ -20,18 +20,27 @@ export default function Update() {
     name: "",
     details: "",
     category: "",
+    questions: [""],
   }); // Kayıt bilgilerini saklayan bir durum
   const [error, setError] = useState(false); // Hata mesajını saklar
   const [loading, setLoading] = useState(false); // Kaydetme işlemi sırasında yüklenme durumunu saklar
   const listingId = params.id; // URL'den gelen kayıt kimliği
 
   // Kayıt bilgileri değiştiğinde çalışan fonksiyon
-  const handleChange = (event) => {
+  const handleChange = (event, index) => {
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+    if (name === "questions") {
+      setFormData((prevFormData) => {
+        const newQuestions = [...prevFormData.questions];
+        newQuestions[index] = value;
+        return { ...prevFormData, questions: newQuestions };
+      });
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
 
   // Sayfa yüklendiğinde, belirtilen kayıt bilgilerini getirir
@@ -116,13 +125,16 @@ export default function Update() {
           />
         </label>
         <label>
-          <span>Question</span>
-          <textarea
-            required
-            name="question"
-            onChange={handleChange}
-            value={formData.question}
-          ></textarea>
+          <span>Questions:</span>
+          {formData.questions.map((question, index) => (
+            <textarea
+              key={index}
+              required
+              name="questions"
+              onChange={(event) => handleChange(event, index)}
+              value={question}
+            ></textarea>
+          ))}
         </label>
         <button className={styles.btn}>
           {loading ? "Adding" : "Update Survey"}
