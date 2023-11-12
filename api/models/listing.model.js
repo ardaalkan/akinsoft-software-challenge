@@ -22,7 +22,7 @@ const listingSchema = new mongoose.Schema(
       type: [String],
       default: [],
     },
-    question: {
+    questions: {
       type: [String],
       default: [],
     },

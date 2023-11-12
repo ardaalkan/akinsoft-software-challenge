@@ -22,7 +22,7 @@ export default function Add() {
     name: "",
     details: "",
     category: "",
-    question: "",
+    questions: [""], // Soruları bir dizi olarak sakla
   });
 
   // Hata ve yükleme durumu
@@ -30,13 +30,35 @@ export default function Add() {
   const [loading, setLoading] = useState(false);
 
   // Input değişikliklerini ele alacak fonksiyon
-  const handleChange = (event) => {
+  const handleChange = (event, index) => {
     const { name, value } = event.target;
 
+    // Eğer bir index belirtilmişse, yani hangi sorunun değiştiğini biliyorsak
+    if (index !== undefined) {
+      const newQuestions = [...formData.questions];
+      newQuestions[index] = value;
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        questions: newQuestions,
+      }));
+    } else {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
+    console.log("Name:", name);
+    console.log("Value:", value);
+  };
+
+  // Soru eklemeyi sağlayacak fonksiyon
+  const addQuestion = () => {
     setFormData((prevFormData) => ({
       ...prevFormData,
-      [name]: value,
+      questions: [...prevFormData.questions, ""],
     }));
+    console.log(formData); // Check the state after adding a question
   };
 
   // Form gönderildiğinde yapılacak işlemler
@@ -66,7 +88,7 @@ export default function Add() {
           name: "",
           details: "",
           category: "",
-          question: "",
+          questions: [""], // Soruları sıfırla
         });
 
         // Başarılı bir şekilde eklendiğine dair bir bildirim gösterilir.
@@ -117,19 +139,23 @@ export default function Add() {
             )}
           />
         </label>
-        <label>
-          <span>Question:</span>
-          <textarea
-            required
-            name="question"
-            onChange={handleChange}
-            value={formData.question}
-          ></textarea>
-        </label>
-        <button className={styles.btn}>
-          {Add ? "Adding" : "Add Survey"}
+        {formData.questions.map((question, index) => (
+          <div key={index}>
+            <label>
+              <span>Question {index + 1}:</span>
+              <textarea
+                required
+                name={`question${index + 1}`}
+                onChange={(e) => handleChange(e, index)}
+                value={question}
+              ></textarea>
+            </label>
+          </div>
+        ))}
+        <button type="button" onClick={addQuestion} className={styles.btn}>
+          Add New Question
         </button>
-        <button className={styles.btn}>
+        <button type="submit" className={styles.btn}>
           {loading ? "Adding" : "Add Survey"}
         </button>
         <p>{error && <p>{error}</p>}</p>

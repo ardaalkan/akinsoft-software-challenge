@@ -48,6 +48,7 @@ Eğer güncelleme işlemi başarısız olursa, bir hata oluşursa,
 bu hatayı sonraki işleme iletir.
 */
 
+//anwser submit ile çalışır.
 export const answerListing = async (req, res, next) => {
   try {
     const listingId = req.params.id;

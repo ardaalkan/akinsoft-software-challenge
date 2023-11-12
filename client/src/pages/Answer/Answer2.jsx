@@ -18,7 +18,6 @@ export default function Answer() {
     details: "",
     answer: "",
     category: "",
-    questions: [""], 
   });
   const [error, setError] = useState(false); // Hata durumu
   const [loading, setLoading] = useState(false); // Yükleme durumu
@@ -40,17 +39,13 @@ export default function Answer() {
   // Sayfa yüklendiğinde, belirli bir anketin verilerini getiren bir etki alanı fonksiyonu
   useEffect(() => {
     const fetchListing = async () => {
-      try {
-        const res = await fetch(`/api/listing/get/${listingId}`);
-        const data = await res.json();
-        console.log(data, res.status);
-        if (data.success === false) {
-          return;
-        }
-        setFormData(data);
-      } catch (error) {
-        console.error("Error fetching listing:", error);
+      const res = await fetch(`/api/listing/get/${listingId}`);
+      const data = await res.json();
+      console.log(data, res.status);
+      if (data.success === false) {
+        return;
       }
+      setFormData(data);
     };
     fetchListing();
   }, [listingId]);
@@ -110,27 +105,25 @@ export default function Answer() {
           </div>
         </div>
         <form onSubmit={handleSubmit} className={styles.mainFormContainer}>
-          {formData.questions.map((question, index) => (
-            <div key={index} className={styles.labelGroup}>
-              <label>
-                <input
-                  required
-                  name={`question-${index}`}
-                  onChange={handleChange}
-                  value={question}
-                  disabled
-                  className={styles.textareaStyle}
-                ></input>
-              </label>
-              <label className={styles.answerDetailContainer}>
-                <textarea
-                  required
-                  name={`answer-${index}`}
-                  onChange={handleChange}
-                ></textarea>
-              </label>{" "}
-            </div>
-          ))}
+          <div className={styles.labelGroup}>
+            <label>
+              <input
+                required
+                name="questions"
+                onChange={handleChange}
+                value={formData.questions}
+                disabled
+                className={styles.textareaStyle}
+              ></input>
+            </label>
+            <label className={styles.answerDetailContainer}>
+              <textarea
+                required
+                name="answer"
+                onChange={handleChange}
+              ></textarea>
+            </label>{" "}
+          </div>
           <button className={styles.btn}>
             {loading ? "Loading" : "Answer Survey"}
           </button>
@@ -141,8 +134,7 @@ export default function Answer() {
   );
 }
 
-{
-  /* <form onSubmit={handleSubmit} className={styles.mainFormContainer}>
+{/* <form onSubmit={handleSubmit} className={styles.mainFormContainer}>
 <div className={styles.labelGroup}>
   <label>
     <input
@@ -166,5 +158,4 @@ export default function Answer() {
   {loading ? "Loading" : "Answer Survey"}
 </button>
 <p>{error && <p>{error}</p>}</p>
-</form> */
-}
+</form> */}
