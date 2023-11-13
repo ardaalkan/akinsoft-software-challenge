@@ -84,10 +84,8 @@ export default function Update() {
           userRef: currentUser._id,
         }),
       });
-
       const data = await res.json();
       setLoading(false);
-
       if (data.success === false) {
         setError(data.message);
       } else {
@@ -139,15 +137,17 @@ export default function Update() {
           />
         </label>
         <label>
-          <span>Questions:</span>
           {formData.questions.map((question, index) => (
-            <textarea
-              key={index}
-              required
-              name="questions"
-              onChange={(event) => handleChange(event, index)}
-              value={question.text}
-            ></textarea>
+            <>
+              <span>Questions:{index + 1}</span>
+              <textarea
+                key={index}
+                required
+                name="questions"
+                onChange={(event) => handleChange(event, index)}
+                value={question.text}
+              ></textarea>
+            </>
           ))}
         </label>
         <button className={styles.btn}>

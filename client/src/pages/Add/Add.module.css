@@ -59,9 +59,9 @@
 }
 
 .questionHeader {
+  width: 100%;
+  justify-content: space-between;
   display: flex;
-  width: 120px;
-  cursor: pointer;
 }
 
 @media (max-width: 900px) {

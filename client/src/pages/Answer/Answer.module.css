@@ -1,6 +1,5 @@
 .container {
   min-height: 100vh;
-  background-color: #4157d110;
 }
 
 .main {
@@ -39,7 +38,6 @@
 
 .fullWidthElement {
   width: 100%;
-  margin-top: 5px;
   height: 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -70,10 +68,6 @@
   letter-spacing: 0.7px;
   font-size: 15px;
 }
-/* 
-.mainFormContainer{
-  background-color: #ffb5b5;
-} */
 
 .mainFormContainer label {
   margin: 0;

@@ -34,7 +34,6 @@ export default function Add() {
   const removeQuestion = (index) => {
     const newQuestions = [...formData.questions];
     newQuestions.splice(index, 1);
-
     setFormData((prevFormData) => ({
       ...prevFormData,
       questions: newQuestions,
@@ -78,13 +77,10 @@ export default function Add() {
     try {
       setLoading(true);
       setError(false);
-
-      // Convert 'questions' array to the desired format
       const formattedQuestions = formData.questions.map((text, index) => ({
         text,
         order: index + 1,
       }));
-
       const res = await fetch("/api/listing/create", {
         method: "POST",
         headers: {
@@ -96,10 +92,8 @@ export default function Add() {
           userRef: currentUser._id,
         }),
       });
-
       const data = await res.json();
       setLoading(false);
-
       if (data.success === false) {
         setError(data.message);
       } else {
@@ -111,7 +105,6 @@ export default function Add() {
           category: "",
           questions: [""], // Soruları sıfırla
         });
-
         // Başarılı bir şekilde eklendiğine dair bir bildirim gösterilir.
         toast.success("Your survey added successfully", {
           position: "top-right",
@@ -164,15 +157,15 @@ export default function Add() {
           <div key={index}>
             <label>
               <div className={styles.questionHeader}>
-                <span>Question {index + 1}:</span>
+                <span>Question {index + 1}</span>
                 <div className={styles.removeBtnContainer}>
-                  <Trash2 style={{ height: "20px", color: "#808080" }} />
-                  <button
+                  <Trash2
+                    style={{ height: "20px", color: "#808080" }}
                     type="button"
                     className={styles.removeBtn}
                     onClick={() => removeQuestion(index)}
                     title="Remove Question"
-                  ></button>
+                  />
                   <span className={styles.tooltipText}>Remove</span>
                 </div>
               </div>
