@@ -16,10 +16,11 @@ export default function Answer() {
   const [formData, setFormData] = useState({
     name: "",
     details: "",
-    answer: "",
     category: "",
-    questions: [""], 
+    questions: [{ text: "" }],
+    answers: [""],
   });
+
   const [error, setError] = useState(false); // Hata durumu
   const [loading, setLoading] = useState(false); // Yükleme durumu
   const listingId = params.id; // Anket kimliği, URL'den alınır
@@ -54,6 +55,8 @@ export default function Answer() {
     };
     fetchListing();
   }, [listingId]);
+
+  console.log("formData:", formData);
 
   // Form gönderildiğinde çalışan bir fonksiyon
   const handleSubmit = async (e) => {
@@ -117,10 +120,10 @@ export default function Answer() {
                   required
                   name={`question-${index}`}
                   onChange={handleChange}
-                  value={question}
+                  value={question.text} // 'text' özelliğini kullan
                   disabled
                   className={styles.textareaStyle}
-                ></input>
+                />
               </label>
               <label className={styles.answerDetailContainer}>
                 <textarea
@@ -131,6 +134,7 @@ export default function Answer() {
               </label>{" "}
             </div>
           ))}
+
           <button className={styles.btn}>
             {loading ? "Loading" : "Answer Survey"}
           </button>

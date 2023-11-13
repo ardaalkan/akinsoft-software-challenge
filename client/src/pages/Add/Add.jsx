@@ -67,6 +67,13 @@ export default function Add() {
     try {
       setLoading(true);
       setError(false);
+
+      // Convert 'questions' array to the desired format
+      const formattedQuestions = formData.questions.map((text, index) => ({
+        text,
+        order: index + 1,
+      }));
+
       const res = await fetch("/api/listing/create", {
         method: "POST",
         headers: {
@@ -74,11 +81,14 @@ export default function Add() {
         },
         body: JSON.stringify({
           ...formData,
+          questions: formattedQuestions,
           userRef: currentUser._id,
         }),
       });
+
       const data = await res.json();
       setLoading(false);
+
       if (data.success === false) {
         setError(data.message);
       } else {

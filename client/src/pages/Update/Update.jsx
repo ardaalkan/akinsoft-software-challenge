@@ -20,8 +20,8 @@ export default function Update() {
     name: "",
     details: "",
     category: "",
-    questions: [""],
-  }); // Kayıt bilgilerini saklayan bir durum
+    questions: [{ text: "", order: 1 }], // Initialize as an array of objects
+  });
   const [error, setError] = useState(false); // Hata mesajını saklar
   const [loading, setLoading] = useState(false); // Kaydetme işlemi sırasında yüklenme durumunu saklar
   const listingId = params.id; // URL'den gelen kayıt kimliği
@@ -43,6 +43,11 @@ export default function Update() {
     }
   };
 
+  const formattedQuestions = formData.questions.map((question, index) => ({
+    text: question.text,
+    order: index + 1,
+  }));
+
   // Sayfa yüklendiğinde, belirtilen kayıt bilgilerini getirir
   useEffect(() => {
     const fetchListing = async () => {
@@ -62,6 +67,7 @@ export default function Update() {
     try {
       setLoading(true);
       setError(false);
+
       const res = await fetch(`/api/listing/update/${listingId}`, {
         method: "POST",
         headers: {
@@ -69,11 +75,14 @@ export default function Update() {
         },
         body: JSON.stringify({
           ...formData,
+          questions: formattedQuestions,
           userRef: currentUser._id,
         }),
       });
+
       const data = await res.json();
       setLoading(false);
+
       if (data.success === false) {
         setError(data.message);
       } else {
@@ -132,7 +141,7 @@ export default function Update() {
               required
               name="questions"
               onChange={(event) => handleChange(event, index)}
-              value={question}
+              value={question.text}
             ></textarea>
           ))}
         </label>

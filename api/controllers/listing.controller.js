@@ -60,10 +60,8 @@ export const answerListing = async (req, res, next) => {
       return next(errorHandler(404, "Listing not found!"));
     }
 
-    // Append the new answer to the answers array
     listing.answers.push(newAnswer);
 
-    // Save the updated listing
     const updatedListing = await listing.save();
 
     res.status(200).json(updatedListing);
