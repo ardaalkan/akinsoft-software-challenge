@@ -4,6 +4,7 @@ import styles from "./Add.module.css";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Trash2 } from "lucide-react";
 
 export default function Add() {
   // Redux'tan "currentUser" bilgisini al
@@ -29,6 +30,17 @@ export default function Add() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Soru kaldırmayı sağlayacak fonksiyon
+  const removeQuestion = (index) => {
+    const newQuestions = [...formData.questions];
+    newQuestions.splice(index, 1);
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      questions: newQuestions,
+    }));
+  };
+
   // Input değişikliklerini ele alacak fonksiyon
   const handleChange = (event, index) => {
     const { name, value } = event.target;
@@ -37,7 +49,6 @@ export default function Add() {
     if (index !== undefined) {
       const newQuestions = [...formData.questions];
       newQuestions[index] = value;
-
       setFormData((prevFormData) => ({
         ...prevFormData,
         questions: newQuestions,
@@ -152,7 +163,19 @@ export default function Add() {
         {formData.questions.map((question, index) => (
           <div key={index}>
             <label>
-              <span>Question {index + 1}:</span>
+              <div className={styles.questionHeader}>
+                <span>Question {index + 1}:</span>
+                <div className={styles.removeBtnContainer}>
+                  <Trash2 style={{ height: "20px", color: "#808080" }} />
+                  <button
+                    type="button"
+                    className={styles.removeBtn}
+                    onClick={() => removeQuestion(index)}
+                    title="Remove Question"
+                  ></button>
+                  <span className={styles.tooltipText}>Remove</span>
+                </div>
+              </div>
               <textarea
                 required
                 name={`question${index + 1}`}

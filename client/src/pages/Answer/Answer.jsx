@@ -159,7 +159,6 @@ export default function Answer() {
               </label>{" "}
             </div>
           ))}
-
           <button className={styles.btn}>
             {loading ? "Loading" : "Answer Survey"}
           </button>
