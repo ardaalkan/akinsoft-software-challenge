@@ -32,10 +32,35 @@ export default function Answer() {
     }
 
     const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
+
+    // Soru veya cevapla ilgili bir değişiklik olduğunu kontrol et
+    if (name.startsWith("question")) {
+      // Eğer değişiklik soruyla ilgiliyse
+      const questionIndex = parseInt(name.split("-")[1], 10); // Soru indeksi
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        questions: prevFormData.questions.map((q, i) =>
+          i === questionIndex ? { ...q, text: value, answers: [] } : q
+        ),
+      }));
+    } else if (name.startsWith("answer")) {
+      // Eğer değişiklik cevapla ilgiliyse
+      const answerIndex = parseInt(name.split("-")[1], 10); // Cevap indeksi
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        questions: prevFormData.questions.map((q, i) =>
+          i === answerIndex
+            ? { ...q, answers: [value] } // Cevapları sıfırlayıp yeni cevabı ekleyin
+            : q
+        ),
+      }));
+    } else {
+      // Diğer durumlar için
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: value,
+      }));
+    }
   };
 
   // Sayfa yüklendiğinde, belirli bir anketin verilerini getiren bir etki alanı fonksiyonu
@@ -65,15 +90,15 @@ export default function Answer() {
     try {
       setLoading(true);
       setError(false);
+      const body = currentUser
+        ? { ...formData, userRef: currentUser._id }
+        : { ...formData };
       const res = await fetch(`/api/listing/${listingId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          ...formData,
-          userRef: currentUser._id,
-        }),
+        body: JSON.stringify(body),
       });
       const data = await res.json();
       setLoading(false);

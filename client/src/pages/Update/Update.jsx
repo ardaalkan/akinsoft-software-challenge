@@ -29,13 +29,17 @@ export default function Update() {
   // Kayıt bilgileri değiştiğinde çalışan fonksiyon
   const handleChange = (event, index) => {
     const { name, value } = event.target;
+
     if (name === "questions") {
+      // Eğer değişiklik questions alanıyla ilgiliyse
       setFormData((prevFormData) => {
         const newQuestions = [...prevFormData.questions];
-        newQuestions[index] = value;
+        // Belirli bir sorunun text özelliğini güncelle
+        newQuestions[index] = { ...newQuestions[index], text: value };
         return { ...prevFormData, questions: newQuestions };
       });
     } else {
+      // Diğer alanlar için sadece değeri güncelle
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
@@ -43,8 +47,9 @@ export default function Update() {
     }
   };
 
+  // Soruların düzenlenmiş hallerini oluşturur.
   const formattedQuestions = formData.questions.map((question, index) => ({
-    text: question.text,
+    text: question.text, // Her bir sorunun text özelliğini alır.
     order: index + 1,
   }));
 

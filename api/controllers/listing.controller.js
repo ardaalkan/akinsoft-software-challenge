@@ -52,7 +52,10 @@ bu hatayı sonraki işleme iletir.
 export const answerListing = async (req, res, next) => {
   try {
     const listingId = req.params.id;
-    const newAnswer = req.body.answer;
+    const newAnswers = req.body.questions.map((question, index) => ({
+      text: question.text,
+      answers: question.answers || [],
+    }));
 
     const listing = await Listing.findById(listingId);
 
@@ -60,7 +63,20 @@ export const answerListing = async (req, res, next) => {
       return next(errorHandler(404, "Listing not found!"));
     }
 
-    listing.answers.push(newAnswer);
+    if (!listing.questions) {
+      listing.questions = [];
+    }
+
+    // Her bir soru için cevapları ekleyerek, var olan cevapları üzerine yazar
+    newAnswers.forEach((newAnswer, index) => {
+      if (listing.questions[index]) {
+        // Eğer soru varsa, var olan cevapları korur ve yeni cevapları ekleyerek günceller
+        listing.questions[index].answers = [
+          ...listing.questions[index].answers,
+          ...newAnswer.answers,
+        ];
+      }
+    });
 
     const updatedListing = await listing.save();
 
