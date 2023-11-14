@@ -79,7 +79,6 @@ export default function Answer() {
     };
     fetchListing();
   }, [listingId]);
-
   // console.log("formData:", formData);
 
   // Form gönderildiğinde çalışan bir fonksiyon

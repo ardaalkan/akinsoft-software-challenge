@@ -1,26 +1,21 @@
-import { useState, useEffect } from "react";
-import Select from "react-select";
-import styles from "./Update.module.css";
-import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import { categoryOptions } from "../../../../api/utils/categorys";
+import UpdateForm from "./_components/_UpdateForm";
 
 export default function Update() {
   const { currentUser } = useSelector((state) => state.user); // Redux'tan kullanıcı bilgileri alınır
   const params = useParams(); // URL parametreleri alınır
   const navigate = useNavigate(); // Sayfa yönlendirme işlemleri için kullanılır
-  const categoryOptions = [
-    { value: "Frontend", label: "Frontend" },
-    { value: "Backend", label: "Backend" },
-    { value: "DevOps", label: "DevOps" },
-  ];
 
   const [formData, setFormData] = useState({
     name: "",
     details: "",
     category: "",
-    questions: [{ text: "", order: 1 }], // Initialize as an array of objects
+    questions: [{ text: "", order: 1 }],
   });
   const [error, setError] = useState(false); // Hata mesajını saklar
   const [loading, setLoading] = useState(false); // Kaydetme işlemi sırasında yüklenme durumunu saklar
@@ -29,17 +24,15 @@ export default function Update() {
   // Kayıt bilgileri değiştiğinde çalışan fonksiyon
   const handleChange = (event, index) => {
     const { name, value } = event.target;
-
     if (name === "questions") {
-      // Eğer değişiklik questions alanıyla ilgiliyse
       setFormData((prevFormData) => {
         const newQuestions = [...prevFormData.questions];
-        // Belirli bir sorunun text özelliğini güncelle
+        // Belirli bir sorunun text özelliğini günceller
         newQuestions[index] = { ...newQuestions[index], text: value };
         return { ...prevFormData, questions: newQuestions };
       });
     } else {
-      // Diğer alanlar için sadece değeri güncelle
+      // Diğer alanlar için sadece değeri günceller
       setFormData((prevFormData) => ({
         ...prevFormData,
         [name]: value,
@@ -49,7 +42,7 @@ export default function Update() {
 
   // Soruların düzenlenmiş hallerini oluşturur.
   const formattedQuestions = formData.questions.map((question, index) => ({
-    text: question.text, // Her bir sorunun text özelliğini alır.
+    text: question.text,
     order: index + 1,
   }));
 
@@ -72,7 +65,6 @@ export default function Update() {
     try {
       setLoading(true);
       setError(false);
-
       const res = await fetch(`/api/listing/update/${listingId}`, {
         method: "POST",
         headers: {
@@ -100,61 +92,13 @@ export default function Update() {
   };
 
   return (
-    <div className={styles.main}>
-      <h2>Update Survey</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          <span>Survey Name:</span>
-          <input
-            type="text"
-            name="name"
-            onChange={handleChange}
-            value={formData.name}
-          ></input>
-        </label>
-        <label>
-          <span>Survey Details:</span>
-          <textarea
-            required
-            name="details"
-            onChange={handleChange}
-            value={formData.details}
-          ></textarea>
-        </label>
-        <label>
-          <span>Survey Category:</span>
-          <Select
-            required
-            name="category"
-            options={categoryOptions}
-            onChange={(selectedOption) =>
-              setFormData({ ...formData, category: selectedOption.value })
-            }
-            value={categoryOptions.find(
-              (option) => option.value === formData.category
-            )}
-            noOptionsMessage="ekle"
-          />
-        </label>
-        <label>
-          {formData.questions.map((question, index) => (
-            <>
-              <span>Questions:{index + 1}</span>
-              <textarea
-                key={index}
-                required
-                name="questions"
-                onChange={(event) => handleChange(event, index)}
-                value={question.text}
-              ></textarea>
-            </>
-          ))}
-        </label>
-        <button className={styles.btn}>
-          {loading ? "Adding" : "Update Survey"}
-        </button>
-        <p>{error && <p>{error}</p>}</p>
-      </form>
-    </div>
+    <UpdateForm
+      formData={formData}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      categoryOptions={categoryOptions}
+      loading={loading}
+      error={error}
+    />
   );
 }
