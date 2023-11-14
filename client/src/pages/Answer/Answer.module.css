@@ -25,6 +25,11 @@
   background-color: #b5d8ff;
 }
 
+.formStyle {
+  display: flex;
+  flex-direction: column;
+}
+
 .detailContainer {
   display: flex;
   background-color: #ffffff;
@@ -56,6 +61,14 @@
   padding: 12px;
   font-size: 25px;
   letter-spacing: 0.3px;
+}
+
+.formInfo h2 {
+  margin-top: 5px;
+}
+
+.responseText {
+  font-size: 13px;
 }
 
 .formInputStyle {

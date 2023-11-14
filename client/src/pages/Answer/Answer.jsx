@@ -1,16 +1,15 @@
-import { useState, useEffect } from "react";
-import styles from "./Answer.module.css";
-import { useSelector } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
+import AnswerForm from "./_components/_AnswerForm";
 
 export default function Answer() {
   // Redux kullanarak oturum açmış kullanıcı bilgilerini alır
   const { currentUser } = useSelector((state) => state.user);
   // React Router'ın "useParams" özelliği ile URL'den parametreleri alır
   const params = useParams();
-  const navigate = useNavigate();
 
   // Form verileri için bir "formData" durumu tanımlanır
   const [formData, setFormData] = useState({
@@ -69,7 +68,7 @@ export default function Answer() {
       try {
         const res = await fetch(`/api/listing/get/${listingId}`);
         const data = await res.json();
-        console.log(data, res.status);
+        // console.log(data, res.status);
         if (data.success === false) {
           return;
         }
@@ -81,12 +80,12 @@ export default function Answer() {
     fetchListing();
   }, [listingId]);
 
-  console.log("formData:", formData);
+  // console.log("formData:", formData);
 
   // Form gönderildiğinde çalışan bir fonksiyon
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(listingId, "listingId");
+    // console.log(listingId, "listingId");
     try {
       setLoading(true);
       setError(false);
@@ -110,7 +109,7 @@ export default function Answer() {
           position: "top-right",
         });
         // Yanıtın gönderildikten sonra "all" sayfasına yönlendirilir
-        navigate(`/all`);
+        setFormData({ ...formData, submitted: true });
       }
     } catch (error) {
       setError(error.message);
@@ -119,80 +118,12 @@ export default function Answer() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.main}>
-        <div className={styles.formStyle}>
-          <div className={styles.fullWidthElement} />
-          <div className={styles.detailContainer}>
-            <div className={styles.fullWidthElementLeft} />
-            <div className={styles.formInfo}>
-              <span type="text" name="name">
-                {formData.name}
-              </span>
-              <br />
-              <span name="details" onChange={handleChange}>
-                {formData.details}
-              </span>
-              <h2>Answer the Survey</h2>
-            </div>
-          </div>
-        </div>
-        <form onSubmit={handleSubmit} className={styles.mainFormContainer}>
-          {formData.questions.map((question, index) => (
-            <div key={index} className={styles.labelGroup}>
-              <label>
-                <input
-                  required
-                  name={`question-${index}`}
-                  onChange={handleChange}
-                  value={question.text} // 'text' özelliğini kullan
-                  disabled
-                  className={styles.textareaStyle}
-                />
-              </label>
-              <label className={styles.answerDetailContainer}>
-                <textarea
-                  required
-                  name={`answer-${index}`}
-                  onChange={handleChange}
-                ></textarea>
-              </label>{" "}
-            </div>
-          ))}
-          <button className={styles.btn}>
-            {loading ? "Loading" : "Answer Survey"}
-          </button>
-          <p>{error && <p>{error}</p>}</p>
-        </form>
-      </div>
-    </div>
+    <AnswerForm
+      formData={formData}
+      handleChange={handleChange}
+      handleSubmit={handleSubmit}
+      loading={loading}
+      error={error}
+    />
   );
-}
-
-{
-  /* <form onSubmit={handleSubmit} className={styles.mainFormContainer}>
-<div className={styles.labelGroup}>
-  <label>
-    <input
-      required
-      name="questions"
-      onChange={handleChange}
-      value={formData.questions}
-      disabled
-      className={styles.textareaStyle}
-    ></input>
-  </label>
-  <label className={styles.answerDetailContainer}>
-    <textarea
-      required
-      name="answer"
-      onChange={handleChange}
-    ></textarea>
-  </label>{" "}
-</div>
-<button className={styles.btn}>
-  {loading ? "Loading" : "Answer Survey"}
-</button>
-<p>{error && <p>{error}</p>}</p>
-</form> */
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 // "ListingCard" adında bir fonksiyonel bileşen tanımlanır
 function ListingCard({ data, onDeleteClick }) {
+
   return (
     // Bileşenin dış sınıfı "styles.listingCard" ile stilendirilir
     <div className={styles.listingCard}>
@@ -16,16 +17,13 @@ function ListingCard({ data, onDeleteClick }) {
         <Link to={`/update/${data._id}`}>
           <p>Edit</p>
         </Link>
-
         {/* Anketi yanıtlama sayfasına yönlendiren bir Link oluşturulur */}
         <Link to={`/${data._id}`}>
           <p>Answer</p>
         </Link>
-
         <Link to={`/${data._id}/response`}>
           <p>Replies</p>
         </Link>
-
         <span onClick={() => onDeleteClick(data._id)}>Delete</span>
       </div>
     </div>

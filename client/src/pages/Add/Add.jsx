@@ -58,8 +58,8 @@ export default function Add() {
         [name]: value,
       }));
     }
-    console.log("Name:", name);
-    console.log("Value:", value);
+    // console.log("Name:", name);
+    // console.log("Value:", value);
   };
 
   // Soru eklemeyi sağlayacak fonksiyon
@@ -68,7 +68,7 @@ export default function Add() {
       ...prevFormData,
       questions: [...prevFormData.questions, ""],
     }));
-    console.log(formData); // Check the state after adding a question
+    // console.log(formData);
   };
 
   // Form gönderildiğinde yapılacak işlemler
