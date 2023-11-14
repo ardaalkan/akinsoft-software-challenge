@@ -1,10 +1,10 @@
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
-import Select from "react-select";
-import styles from "./Add.module.css";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Trash2 } from "lucide-react";
+import Select from "react-select";
+import styles from "./Add.module.css";
 
 export default function Add() {
   // Redux'tan "currentUser" bilgisini al

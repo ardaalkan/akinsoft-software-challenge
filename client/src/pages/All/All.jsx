@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import ListingCard from "../All/ListingCard/ListingCard";
-import styles from "../All/All.module.css";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
-const ADD_SURVEY_REMINDER = "You don't have any surveys. Please create.";
+import ListingContainer from "./ListingContainer/ListingContainer";
 
 export default function All() {
   const [showListingsError, setShowListingsError] = useState(false);
@@ -40,7 +37,6 @@ export default function All() {
       }
       // Bu popüler toast package başarılı bir silme durumunda Toast bildirimi gösterecek.
       toast.success("Listing deleted successfully!");
-
       setUserListings((prev) =>
         prev.filter((listing) => listing._id !== listingId)
       );
@@ -54,21 +50,10 @@ export default function All() {
   }, []); // bağımlılık dizisi ve İngilizcede "dependency array" olarak geçer.
 
   return (
-    <div className={styles.listingContainer}>
-      <h1 style={{ textAlign: "left", margin: "10px" }}>All Survey</h1>
-      {showListingsError && <p>Hata oluştu.</p>}
-      {userListings.length === 0 && (
-        <p className={styles.reminder}>{ADD_SURVEY_REMINDER}</p>
-      )}
-      <div>
-        {userListings.map((listing, index) => (
-          <ListingCard
-            key={index}
-            data={listing}
-            onDeleteClick={handleListingDelete}
-          />
-        ))}
-      </div>
-    </div>
+    <ListingContainer
+      showListingsError={showListingsError}
+      userListings={userListings}
+      onListingDelete={handleListingDelete}
+    />
   );
 }
