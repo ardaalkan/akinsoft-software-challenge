@@ -54,7 +54,7 @@
           <form className={styles.form} onSubmit={handleSubmit}>
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Type your email address"
               className={styles.usernameInput}
               id="email"
               onChange={handleChange}

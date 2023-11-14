@@ -53,12 +53,12 @@ export default function SignUp() {
             type="text"
             placeholder="Username"
             className={styles.usernameInput}
-            id="username"
+            id="Choose a username"
             onChange={handleChange}
           />
           <input
             type="email"
-            placeholder="Email"
+            placeholder="Type your email address"
             className={styles.usernameInput}
             id="email"
             onChange={handleChange}
@@ -74,9 +74,11 @@ export default function SignUp() {
             {loading ? "Loading" : "Sign Up"}
           </button>
         </form>
-        <Link to={"/sign-in"}>
-          <h2>Sign In</h2>
-        </Link>
+        <div>
+          <Link to={"/sign-in"}>
+            <h2>Sign In</h2>
+          </Link>
+        </div>
       </div>
       {error && <p>{error}</p>} {/* Hata mesajı gösterilir */}
     </div>

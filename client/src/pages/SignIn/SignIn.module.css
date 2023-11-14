@@ -1,4 +1,4 @@
-/* NewSignUp.module.css */
+/* Stil Kodu */
 
 .pageContainer {
   display: flex;
@@ -10,6 +10,11 @@
 }
 
 .signUp {
+  display: flex;
+  height: 300px;
+  min-width: 300px;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
   background-color: #f8f8f9;
   padding: 80px;
@@ -77,11 +82,4 @@ h2 {
 .usernameInput::placeholder {
   color: #999;
   font-size: 14px;
-}
-
-.errorContainer {
-  padding: 15px;
-  margin: 15px;
-  background-color: #f7b4bb;
-  border-radius: 15px;
 }
