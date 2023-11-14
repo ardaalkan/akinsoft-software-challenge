@@ -1,4 +1,4 @@
-import styles from "../Answer.module.css"; // Adjust the path accordingly
+import styles from "../Answer.module.css";
 
 const SuccessInfo = ({ formData, handleChange }) => {
   return (
