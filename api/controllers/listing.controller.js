@@ -86,22 +86,6 @@ export const answerListing = async (req, res, next) => {
   }
 };
 
-export const getAnswers = async (listingId) => {
-  try {
-    const listing = await Listing.findById(listingId);
-
-    if (!listing) {
-      throw errorHandler(404, "Listing not found!");
-    }
-
-    const answers = listing.answers;
-
-    return answers;
-  } catch (error) {
-    throw error;
-  }
-};
-
 export const getListing = async (req, res, next) => {
   try {
     const listing = await Listing.findById(req.params.id);

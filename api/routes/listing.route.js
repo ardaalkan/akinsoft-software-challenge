@@ -5,7 +5,6 @@ import {
   updateListing,
   getListing,
   answerListing,
-  getAnswers,
 } from "../controllers/listing.controller.js";
 
 // Express Router oluştur
@@ -23,11 +22,8 @@ router.post('/update/:id', updateListing);
 //
 router.post('/:id', answerListing);
 
-//
-router.post('/:id/response', getAnswers);
 
 // "/get/:id" yoluna gelen GET isteğini "getListing" işlevine yönlendir
 router.get("/get/:id", getListing);
 
-// Router'i dışa aktar
 export default router;

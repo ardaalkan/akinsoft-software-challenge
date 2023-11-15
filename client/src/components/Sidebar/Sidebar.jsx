@@ -1,6 +1,12 @@
 import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { BookPlus, LayoutDashboard, FileSearch, LogOut } from "lucide-react";
+import {
+  BookPlus,
+  LayoutDashboard,
+  FileSearch,
+  LogOut,
+  Reply,
+} from "lucide-react";
 import Image from "../../assets/images/survey_app_image.jpg";
 import Avatar from "./Avatar/Avatar";
 import styles from "./Sidebar.module.css";
@@ -96,6 +102,16 @@ export default function Sidebar() {
             </li>
             <li>
               <NavLink
+                to="/response"
+                style={{ textDecoration: "none" }}
+                className={classNameFunc}
+              >
+                <Reply style={{ marginRight: "25px" }} />
+                {width > breakpoint && <span>Replies</span>}
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
                 style={{ textDecoration: "none" }}
                 className={styles.signOutLink}
                 onClick={handleSignOut}
@@ -109,4 +125,9 @@ export default function Sidebar() {
       </div>
     </div>
   );
+}
+{
+  /* <a href={`/response`}>
+<p>Replies</p>
+</a> */
 }

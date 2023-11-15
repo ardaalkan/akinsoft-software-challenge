@@ -33,9 +33,6 @@ function ListingCard({ data, onDeleteClick }) {
         <a href="#" onClick={handleAnswerClick}>
           <p>Copy Link</p>
         </a>
-        <a href={`/${data._id}/response`}>
-          <p>Replies</p>
-        </a>
         <span onClick={() => onDeleteClick(data._id)}>Delete</span>
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function App() {
             <Route path="/all" element={<All />} />  {/* Tüm anketler */}
             <Route path="/add" element={<Add />} />  {/* Yeni anket ekleme */}
             <Route path="/update/:id" element={<Update />} />  {/* Anket güncelleme */}
-            <Route path="/:id/response" element={<Response />}/> {/* :id cevapları */}
+            <Route path="/response" element={<Response />}/> {/* :id cevapları */}
           </Route>
         </Route>
         <Route path="/:id" element={<Answer />} />  {/* Anket yanıtlama */}
