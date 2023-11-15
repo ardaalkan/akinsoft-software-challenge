@@ -66,6 +66,16 @@
     color: rgb(255, 47, 82);
 }
 
+.noneList {
+  padding: 10px;
+  background-color: #c4dea4;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Center the text */
+}
+
 /* .noAnswer{
   padding: 20px;
   background-color: #FF5733;

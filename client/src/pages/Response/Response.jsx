@@ -32,7 +32,7 @@ export default function Response() {
     <div className={styles.main}>
       {showListingsError && <p>Error.</p>}
       {userListings.length === 0 ? (
-        <h1> there is no answer </h1>
+        <h2 className={styles.noneList}> None of your surveys have been answered. </h2>
       ) : (
         <ResponseList userListings={userListings} />
       )}

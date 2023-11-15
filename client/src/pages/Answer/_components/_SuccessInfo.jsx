@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import styles from "../Answer.module.css";
 
 const SuccessInfo = ({ formData }) => {
@@ -16,9 +15,6 @@ const SuccessInfo = ({ formData }) => {
             <span className={styles.responseText}>
               Thank you for your response
             </span>
-            <Link to="#">
-              <h2>Post another reply.</h2>
-            </Link>
           </div>
         </div>
       </div>
