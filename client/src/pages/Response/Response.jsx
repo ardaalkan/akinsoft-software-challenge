@@ -30,9 +30,12 @@ export default function Response() {
 
   return (
     <div className={styles.main}>
-      <h1>Replies</h1>
       {showListingsError && <p>Error.</p>}
-      <ResponseList userListings={userListings} />
+      {userListings.length === 0 ? (
+        <h1> there is no answer </h1>
+      ) : (
+        <ResponseList userListings={userListings} />
+      )}
     </div>
   );
 }
